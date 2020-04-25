@@ -16,7 +16,12 @@ namespace Api_Fetch.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public decimal FinalPrice { get; set; }
-     
+        public Image Images { get; set; }
+    }
+    public class Image
+    {
+        public string PrimarySmall { get; set; }
+        public string PrimaryMedium { get; set; }
     }
   
 }

@@ -6,7 +6,7 @@
 
 <h1>Index</h1>
 <form class="form-inline my-2 my-lg-0" asp-controller="Gears" asp-action="Index">
-    <input class="form-control mr-sm-2" type="text" name="searchString" placeholder="Search">
+    <input class="form-control mr-sm-2" type="text" name="searchString" placeholder="Product search">
     <button class="btn btn-secondary my-2 my-sm-0 compSearch" type="submit">Search</button>
 </form>
 
@@ -23,6 +23,9 @@
             <th>
                 Price
             </th>
+            <th>
+                Pic
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,7 +34,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => item.Id) <img src="@Html.DisplayFor(ModelItem => item.Images.PrimarySmall)" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
