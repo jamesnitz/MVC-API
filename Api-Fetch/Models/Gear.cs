@@ -16,7 +16,7 @@ namespace Api_Fetch.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public decimal FinalPrice { get; set; }
-
-
+     
     }
+  
 }

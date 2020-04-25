@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Api_Fetch.Models;
 using Microsoft.AspNetCore.Http;
@@ -31,13 +32,31 @@ namespace Api_Fetch.Controllers
 
 
         // GET: Gears
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchString)
         {
-            var gear =  await GetGearRecord();
+            if (searchString != null)
+            {
+            var gear =  await GetGearRecord(searchString);
             return View(gear);
+            }
+            else
+            {
+                var gear = await GetGear();
+                return View(gear);
+            }
+           
         }
 
-        private async Task<GearRecord> GetGearRecord()
+        private async Task<GearRecord> GetGearRecord(string searchString)
+        {
+            using (var client = new HttpClient())
+            {
+                var content = await client.GetStringAsync($"https://api.sierra.com/api/1.0/products/search~{searchString}?api_key=a13e35793a797e828b12e82f51d4ba88");
+                return JsonConvert.DeserializeObject<GearRecord>(content);
+            }
+
+        }
+        private async Task<GearRecord> GetGear()
         {
             using (var client = new HttpClient())
             {
@@ -46,8 +65,9 @@ namespace Api_Fetch.Controllers
             }
 
         }
-    
- 
+
+
+
 
 
         // GET: Gears/Details/5
